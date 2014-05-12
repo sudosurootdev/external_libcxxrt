@@ -67,8 +67,8 @@
  * The least significant bit of the guard variable indicates that the object
  * has been initialised, the most significant bit is used for a spinlock.
  */
-#ifdef __arm__
-// ARM ABI - 32-bit guards.
+#if defined(__arm__) || defined(__mips__)
+// ARM/MIPS ABI - 32-bit guards.
 typedef uint32_t guard_t;
 static const uint32_t LOCKED = static_cast<guard_t>(1) << 31;
 static const uint32_t INITIALISED = 1;
