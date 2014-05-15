@@ -642,6 +642,7 @@ void __cxa_free_dependent_exception(void *thrown_exception)
 	free_exception(reinterpret_cast<char*>(ex));
 }
 
+#ifndef NO_LIBDL
 /**
  * Callback function used with _Unwind_Backtrace().
  *
@@ -666,6 +667,7 @@ static _Unwind_Reason_Code trace(struct _Unwind_Context *context, void *c)
 	}
 	return _URC_CONTINUE_UNWIND;
 }
+#endif
 
 /**
  * Report a failure that occurred when attempting to throw an exception.
@@ -722,7 +724,9 @@ static void report_failure(_Unwind_Reason_Code err, __cxa_exception *thrown_exce
 			if (status == 0) { free(demangled); }
 			// Print a back trace if no handler is found.
 			// TODO: Make this optional
+#ifndef NO_LIBDL
 			_Unwind_Backtrace(trace, 0);
+#endif
 
 			// Just abort. No need to call std::terminate for the second time
 			abort();
