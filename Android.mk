@@ -33,7 +33,7 @@ LIBCXXRT_SRC_FILES := \
 	src/typeinfo.cc \
 
 LIBCXXRT_CFLAGS := \
-	-I$(LOCAL_PATH)/include/ \
+	-I$(LOCAL_PATH)/src/ \
 
 LIBCXXRT_RTTI_FLAG := -frtti
 LIBCXXRT_CPPFLAGS := \
